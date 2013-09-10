@@ -1,0 +1,26 @@
+.navbar.navbar-fixed-top
+  .navbar-inner
+    .container
+      a.brand(href="/")= title
+      .nav-collapse
+
+.container
+  .hero-unit
+
+    form(class='container-horizontal', action='/create', method='post',id='inputGroup')
+        input(id='addButton', type="button", value="+", class='btn btn-alert pull-right') Add URL
+        div.control-group
+          div.controls    
+            input(type='submit', value='Save', class='btn btn-success')
+            <input type="text" class ="input-xlarge" name="url0"/>
+       
+          
+
+script. 
+  $(document).ready(function(){
+    var dex = 1; 
+    pressedKeys = []; 
+    $("#addButton").click(function(){
+      $("#inputGroup").append('<input type="text", name="url' + dex++ + '", class ="input-xlarge" text="URL" />');
+    });  
+  }); 
