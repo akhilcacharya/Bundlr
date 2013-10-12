@@ -1,0 +1,10 @@
+.navbar.navbar-fixed-top
+	.navbar-inner
+		.container
+			a.brand(href="/")= "Bundlr"
+				.nav-collapse
+.container
+	.hero-unit
+		each url in urls
+			li 
+				a(href='#{url}') #{url}

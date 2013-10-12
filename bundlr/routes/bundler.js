@@ -10,18 +10,17 @@ db.on('error', console.error.bind(console, 'connection error:'));
 });
 
 exports.index = function(req, res){
-  res.render('index', { title: 'Bundlr' })
+  res.render('Home', { title: 'Bundlr' })
 };
 
 exports.post = function(req, res){
-	
 	var posted = req.body;  
 	var urlArray = []; 
 	var id = getId(); 
 
-	for(var x in posted){
-		 console.log(posted[x]); 
-		 urlArray.push(posted[x]); 
+	for(var x in posted.bundle){
+	 console.log(posted.bundle[x]); 
+	 urlArray.push(posted.bundle[x]); 
 	}
 
 	var newBundle = new Bundle({
@@ -34,25 +33,24 @@ exports.post = function(req, res){
 		if(err){throw err;}
 		newBundle.saveCallback(); 
 	})
-
-	res.render('created', {url: "localhost:3000/b/" + id})
-
+	
+	//Sends a plain ol' text after the GUID is generated. 
+	//TODO: Make into a JSON Api. Those are fun. 
+	res.send(id); 
 }; 
 
 exports.get = function(req, res){
-
 	var queryId = req.params.id; 
 	Bundle.findOne({'guid': queryId}, function(err, bundle){
-		if(err){
+		if(!bundle){
 		 	res.render('404')
 		} 
 		else{
+			//For development only. 
 			console.log("Found it! " + " " + bundle.urls); 
-			res.render('urls', {urls: JSON.stringify(bundle.urls)}) 
+			res.render('urls', {urls: bundle.urls}) 
 		} 
 	}); 
-
-	
 }; 
 
 function getId(){
@@ -61,6 +59,5 @@ function getId(){
 
     for( var i=0; i < 5; i++ )
         text += possible.charAt(Math.floor(Math.random() * possible.length));
-
     return text;
 }
