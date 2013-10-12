@@ -1,4 +1,4 @@
-#Bundler
+#Bundlr (Not to be confused with the web curator site)
 Written in Node.js on top of the Express.js framework, Bundler is a super simple application that lets you "bundle" multiple URLs into one, simple url. Think bit.ly, except I made it :)
 
 It was a pretty cool learning experience, as I hadn't had a real encounter with Node.js or MongoDB before. Not exactly the *best* use of the language and framework, but hey. 
